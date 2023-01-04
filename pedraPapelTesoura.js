@@ -11,19 +11,19 @@ function getComputerChoice() {
 }
 
 function playRound(playerSelection = '', computerSelection = '') {
-    const lPlayerSelection = playerSelection.toLowerCase(),
-    lComputerSelection = computerSelection.toLowerCase();
+    const lowercasePlayerSelection = playerSelection.toLowerCase(),
+    lowercaseComputerSelection = computerSelection.toLowerCase();
 
-    if (lPlayerSelection === 'pedra' && lComputerSelection === 'tesoura' ||
-        lPlayerSelection === 'papel' && lComputerSelection === 'pedra' ||
-        lPlayerSelection === 'tesoura' && lComputerSelection === 'papel') {
-        console.log(`Você ganhou! ${lPlayerSelection} ganha de ${lComputerSelection}`);
+    if (lowercasePlayerSelection === 'pedra' && lowercaseComputerSelection === 'tesoura' ||
+        lowercasePlayerSelection === 'papel' && lowercaseComputerSelection === 'pedra' ||
+        lowercasePlayerSelection === 'tesoura' && lowercaseComputerSelection === 'papel') {
+        console.log(`Você ganhou! ${lowercasePlayerSelection} ganha de ${lowercaseComputerSelection}`);
         return 'v';
-    } else if (lPlayerSelection === lComputerSelection) {
+    } else if (lowercasePlayerSelection === lowercaseComputerSelection) {
         console.log('Empatou!');
         return 'e'
     } else {
-        console.log(`Você perdeu :( ${lComputerSelection} ganha de ${lPlayerSelection}`);
+        console.log(`Você perdeu :( ${lowercaseComputerSelection} ganha de ${lowercasePlayerSelection}`);
         return 'd';
     }
 }
@@ -32,9 +32,9 @@ function printEndGameMessage(playerScore, cpuScore) {
     if (playerScore === cpuScore) {
         return `O placar final terminou empatado ${playerScore}x${cpuScore}`;
     } else if (playerScore > cpuScore) {
-        return `Jogador ganhou por ${playerScore}x${cpuScore}`;
+        return `Jogador ganhou de ${playerScore}x${cpuScore}`;
     } else {
-        return `CPU ganhou por ${cpuScore}x${playerScore}`;
+        return `CPU ganhou de ${cpuScore}x${playerScore}`;
     }
 }
 
