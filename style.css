@@ -1,0 +1,42 @@
+body {
+    font-family: monospace;
+}
+
+h1 {
+    text-align: center;
+    font-size: 50px;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+}
+
+.pedra,
+.papel,
+.tesoura {
+    width: 120px;
+    height: 120px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.pedra {
+    background-image: url(./assets/icons8-hand-rock-skin-type-5-96.png);
+}
+
+.papel {
+    background-image: url(./assets/icons8-hand-100.png);
+}
+
+.tesoura {
+    background-image: url(./assets/icons8-hand-scissors-100.png);
+}
+
+.result {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

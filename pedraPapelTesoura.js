@@ -10,20 +10,19 @@ function getComputerChoice() {
     }
 }
 
-function playRound(playerSelection = '', computerSelection = '') {
-    const lowercasePlayerSelection = playerSelection.toLowerCase(),
-    lowercaseComputerSelection = computerSelection.toLowerCase();
+function playRound(playerSelection) {
+    const computerSelection = getComputerChoice();
 
-    if (lowercasePlayerSelection === 'pedra' && lowercaseComputerSelection === 'tesoura' ||
-        lowercasePlayerSelection === 'papel' && lowercaseComputerSelection === 'pedra' ||
-        lowercasePlayerSelection === 'tesoura' && lowercaseComputerSelection === 'papel') {
-        console.log(`Você ganhou! ${lowercasePlayerSelection} ganha de ${lowercaseComputerSelection}`);
+    if (playerSelection === 'Pedra' && computerSelection === 'Tesoura' ||
+        playerSelection === 'Papel' && computerSelection === 'Pedra' ||
+        playerSelection === 'Tesoura' && computerSelection === 'Papel') {
+        showResults(`Você ganhou! ${playerSelection} ganha de ${computerSelection}`);
         return 'v';
-    } else if (lowercasePlayerSelection === lowercaseComputerSelection) {
-        console.log('Empatou!');
-        return 'e'
+    } else if (playerSelection === computerSelection) {
+        showResults('Empatou!');
+        return 'e';
     } else {
-        console.log(`Você perdeu :( ${lowercaseComputerSelection} ganha de ${lowercasePlayerSelection}`);
+        showResults(`Você perdeu :( ${computerSelection} ganha de ${playerSelection}`);
         return 'd';
     }
 }
@@ -38,23 +37,42 @@ function printEndGameMessage(playerScore, cpuScore) {
     }
 }
 
-function game() {
-    let playerScore = 0,
-        cpuScore = 0;
-
-    for (let i = 0; i < 5; i++) {
-        let playerSelection = prompt('Sua escolha [Pedra, papel ou tesoura]:', '');
-        let computerChoice = getComputerChoice();
-        let result = playRound(playerSelection, computerChoice);
-        
-        if ( result === 'v') {
-            playerScore++;
-        } else if (result === 'd') {
-            cpuScore++;
-        }
+function evaluateScore(result) {
+    if (result === 'v') {
+        playerScore++;
+    } else if (result === 'd') {
+        cpuScore++;
     }
 
-    console.log(printEndGameMessage(playerScore, cpuScore));
+    timesPlayed++;
+
+    if (timesPlayed === 5) {
+        showResults(printEndGameMessage(playerScore, cpuScore));
+        timesPlayed = 0;
+        playerScore = 0;
+        cpuScore = 0;
+    }
 }
 
-game();
+function playGame(playerSelection) {   
+    let result = playRound(playerSelection.target.value);  
+    evaluateScore(result);
+}
+
+function showResults(resultMessage) {
+    const result = document.createElement('div');
+    result.textContent = resultMessage;
+    result.classList.toggle('result');
+    document.body.appendChild(result);
+}
+
+let playerScore = 0,
+    cpuScore = 0,
+    timesPlayed = 0;
+
+const options = document.querySelectorAll('button');
+
+options.forEach(button => {
+    button.addEventListener('click', playGame);
+});
+
